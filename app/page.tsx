@@ -777,6 +777,10 @@ export default function Home() {
   };
 
   const shareMenuAsText = async (menu: MenuRow) => {
+    const shareClubName =
+      clubs.find((club) => club.id === menu.club_id)?.name ??
+      clubs.find((club) => club.id === selectedClub)?.name ??
+      "部活未選択";
     const detailText = menuItems.length
       ? menuItems
           .map((item, index) => {
@@ -788,7 +792,7 @@ export default function Home() {
     const text = [
       "CLUB HUB 練習メニュー",
       `メニュー名: ${menu.title}`,
-      `部活: ${clubs.find((club) => club.id === menu.club_id)?.name ?? selectedClubName}`,
+      `部活: ${shareClubName}`,
       `価格: ${menu.for_sale ? String(menu.price_coin ?? 0) + " coin" : "無料"}`,
       "",
       "【練習内容】",
